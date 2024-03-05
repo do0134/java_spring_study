@@ -22,8 +22,27 @@ public class BookService {
     @Transactional
     public Book updateBook(Long id, String name, String content) {
         Book book = bookRepository.findById(id).orElseThrow(RuntimeException::new);
-        book.setName(name);
-        book.setContent(content);
+        if (!name.isEmpty()) {
+            book.setName(name);
+        }
+        if (!content.isEmpty()) {
+            book.setContent(content);
+        }
         return book;
+    }
+
+    public void fake(Long id, String name, String content) {
+        Book book = bookRepository.findById(id).orElseThrow(RuntimeException::new);
+        fakeUpdate(book, name, content);
+    }
+
+    @Transactional
+    public void fakeUpdate(Book book, String name, String content) {
+        if (!name.isEmpty()) {
+            book.setName(name);
+        }
+        if (!content.isEmpty()) {
+            book.setContent(content);
+        }
     }
 }

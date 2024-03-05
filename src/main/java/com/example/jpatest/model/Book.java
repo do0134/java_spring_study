@@ -2,12 +2,14 @@ package com.example.jpatest.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Timestamp;
 import java.time.Instant;
 
 
 @Data
+@DynamicUpdate
 @Entity
 public class Book {
 

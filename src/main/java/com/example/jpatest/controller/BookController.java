@@ -26,4 +26,15 @@ public class BookController {
         bookService.updateBook(bookId,bookRequestDto.getName(),bookRequestDto.getContent());
         return new ResponseEntity<>(bookRepository.findById(bookId).orElseThrow(RuntimeException::new), HttpStatus.OK);
     }
+
+    @PutMapping("/fake/{bookId}")
+    public ResponseEntity<Book> fakeBook(@RequestBody BookRequestDto bookRequestDto, @PathVariable("bookId") Long bookId) {
+        bookService.fake(bookId,bookRequestDto.getName(),bookRequestDto.getContent());
+        return new ResponseEntity<>(bookRepository.findById(bookId).orElseThrow(RuntimeException::new), HttpStatus.OK);
+    }
+
+    @GetMapping("/{bookId}")
+    public ResponseEntity<Book> getBook(@PathVariable("bookId") Long bookId) {
+        return new ResponseEntity<>(bookRepository.findById(bookId).orElseThrow(RuntimeException::new), HttpStatus.OK);
+    }
 }
