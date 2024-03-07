@@ -39,4 +39,11 @@ public class Book {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
+    public static Book of(String name, String content) {
+        Book book = new Book();
+        book.setName(name);
+        book.setContent(content);
+        return book;
+    }
+
 }

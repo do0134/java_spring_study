@@ -35,6 +35,6 @@ public class BookController {
 
     @GetMapping("/{bookId}")
     public ResponseEntity<Book> getBook(@PathVariable("bookId") Long bookId) {
-        return new ResponseEntity<>(bookRepository.findById(bookId).orElseThrow(RuntimeException::new), HttpStatus.OK);
+        return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
     }
 }

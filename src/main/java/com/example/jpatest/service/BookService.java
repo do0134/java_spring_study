@@ -16,12 +16,17 @@ public class BookService {
         Book book = new Book();
         book.setName(name);
         book.setContent(content);
-        return bookRepository.save(book);
+
+        bookRepository.save(book);
+
+        Book findBook = bookRepository.findById(book.getId()).orElseThrow(RuntimeException::new);
+        return findBook;
     }
 
     @Transactional
     public Book updateBook(Long id, String name, String content) {
         Book book = bookRepository.findById(id).orElseThrow(RuntimeException::new);
+
         if (!name.isEmpty()) {
             book.setName(name);
         }
@@ -29,6 +34,11 @@ public class BookService {
             book.setContent(content);
         }
         return book;
+    }
+
+    @Transactional
+    public Book getBook(Long id) {
+        return bookRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void fake(Long id, String name, String content) {
