@@ -2,8 +2,10 @@ package com.example.jpatest.controller;
 
 import com.example.jpatest.model.Book;
 import com.example.jpatest.model.BookRequestDto;
+import com.example.jpatest.model.SaleBooks;
 import com.example.jpatest.repository.BookRepository;
 import com.example.jpatest.service.BookService;
+import com.example.jpatest.service.SaleBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
     private final BookService bookService;
     private final BookRepository bookRepository;
+    private final SaleBookService saleBookService;
 
     @PostMapping("/create")
     public ResponseEntity<Book> createBook(@RequestBody BookRequestDto bookRequestDto) {
@@ -36,5 +39,15 @@ public class BookController {
     @GetMapping("/{bookId}")
     public ResponseEntity<Book> getBook(@PathVariable("bookId") Long bookId) {
         return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
+    }
+
+    @PostMapping("/saleBook/{bookId}")
+    public ResponseEntity<SaleBooks> createSaleBook(@PathVariable("bookId") Long bookId) {
+        return new ResponseEntity<>(saleBookService.createSaleBook(bookId), HttpStatus.OK);
+    }
+
+    @GetMapping("/saleBook/{saleBookId}")
+    public ResponseEntity<SaleBooks> getSaleBook(@PathVariable("saleBookId") Long saleBookId) {
+        return new ResponseEntity<>(saleBookService.getSaleBooks(saleBookId), HttpStatus.OK);
     }
 }
