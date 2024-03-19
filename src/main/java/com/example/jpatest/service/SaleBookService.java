@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SaleBookService {
@@ -27,5 +29,9 @@ public class SaleBookService {
         System.out.println(saleBooks);
         Book book = saleBooks.getBook();
         return SaleBooks.of(book);
+    }
+
+    public List<SaleBooks> getAllSaleBooks() {
+        return saleBookRepository.findAll();
     }
 }

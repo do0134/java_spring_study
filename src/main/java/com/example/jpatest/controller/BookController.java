@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/book")
@@ -49,5 +51,10 @@ public class BookController {
     @GetMapping("/saleBook/{saleBookId}")
     public ResponseEntity<SaleBooks> getSaleBook(@PathVariable("saleBookId") Long saleBookId) {
         return new ResponseEntity<>(saleBookService.getSaleBooks(saleBookId), HttpStatus.OK);
+    }
+
+    @GetMapping("/saleBook")
+    public ResponseEntity<List<SaleBooks>> getAllSaleBooks() {
+        return new ResponseEntity<>(saleBookService.getAllSaleBooks(), HttpStatus.OK);
     }
 }
